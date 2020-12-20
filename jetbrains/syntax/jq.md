@@ -1,7 +1,36 @@
-To provide some basic syntax coloring for
+This guide describes how to add some basic syntax coloring for
 [jq](https://stedolan.github.io/jq)
-files in JetBrains IDEs:
+files in JetBrains IDEs.
+It is based on [jq v1.6](https://stedolan.github.io/jq/manual/v1.6/).
 
+I copied the keywords list from
+[vito-c/jq.vim](https://github.com/vito-c/jq.vim). Thanks!
+
+The keyword lists were generated using the following jq commands:
+```sh
+# get the sorted list of functions
+jq --null-input --raw-output 'builtins | sort | .[]'
+
+# produce lists of functions by the number of their arguments
+functions_by_arity='
+  builtins
+  | map(split("/"))
+  | map({ function: .[0], arity: .[1] })
+  | group_by(.arity)
+  | map({
+      arity: (. | first | .arity),
+      functions: (. | map(.function) | sort)
+    })
+  | sort_by(.arity)
+'
+jq --null-input $functions_by_arity
+
+# get a list of functions with a particular arity
+arity_filter='map(select(.arity == $arity) | .functions) | flatten | .[]'
+jq --null-input --raw-output --arg arity 1 "$functions_by_arity | $arity_filter"
+```
+
+To configure syntax highlighting in JetBrains IDEs:
 * Open the preferences dialog and navigage to Editor > File Types
 * Add a new file type with a name like 'jq filter'
 * Set the Line comment to `#`
@@ -28,11 +57,9 @@ Configure the keyword lists as follows:
 * not
 * null
 * or
-* reduce
 * then
 * true
 * try
-* while
 
 **List 2** (_functions with 1 argument_):
 * IN
@@ -217,8 +244,40 @@ Configure the keyword lists as follows:
 * y1
 
 **List 4** (_functions with 2 or more arguments_):
+* IN
+* INDEX
 * JOIN
+* all
+* any
+* atan2
+* capture
+* copysign
+* drem
+* fdim
 * fma
+* fmax
+* fmin
+* fmod
 * gsub
+* hypot
+* jn
+* ldexp
+* limit
+* match
+* nextafter
+* nexttoward
+* nth
+* pow
 * range
+* recurse
+* remainder
+* scalb
+* scalbln
+* setpath
+* split
+* splits
 * sub
+* test
+* until
+* while
+* yn
