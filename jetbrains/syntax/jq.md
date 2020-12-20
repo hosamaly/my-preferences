@@ -16,6 +16,8 @@ functions_by_arity='
   builtins
   | map(split("/"))
   | map({ function: .[0], arity: .[1] })
+  | reverse  # let `unique_by` return the first arity
+  | unique_by(.function)
   | group_by(.arity)
   | map({
       arity: (. | first | .arity),
@@ -62,10 +64,7 @@ Configure the keyword lists as follows:
 * try
 
 **List 2** (_functions with 1 argument_):
-* IN
 * INDEX
-* all
-* any
 * bsearch
 * capture
 * combinations
@@ -73,14 +72,10 @@ Configure the keyword lists as follows:
 * del
 * delpaths
 * endswith
-* error
-* first
-* flatten
 * format
 * fromstream
 * getpath
 * group_by
-* halt_error
 * has
 * in
 * index
@@ -88,7 +83,6 @@ Configure the keyword lists as follows:
 * inside
 * isempty
 * join
-* last
 * ltrimstr
 * map
 * map_values
@@ -98,15 +92,12 @@ Configure the keyword lists as follows:
 * nth
 * path
 * paths
-* range
-* recurse
 * repeat
 * rindex
 * rtrimstr
 * scan
 * select
 * sort_by
-* split
 * splits
 * startswith
 * strflocaltime
@@ -135,7 +126,6 @@ Configure the keyword lists as follows:
 * builtins
 * cbrt
 * ceil
-* combinations
 * cos
 * cosh
 * debug
@@ -150,7 +140,6 @@ Configure the keyword lists as follows:
 * explode
 * expm1
 * fabs
-* false
 * finites
 * first
 * flatten
@@ -203,11 +192,9 @@ Configure the keyword lists as follows:
 * normals
 * not
 * now
-* null
 * nulls
 * numbers
 * objects
-* paths
 * pow10
 * recurse
 * recurse_down
@@ -234,7 +221,6 @@ Configure the keyword lists as follows:
 * tostream
 * tostring
 * transpose
-* true
 * trunc
 * type
 * unique
@@ -245,12 +231,8 @@ Configure the keyword lists as follows:
 
 **List 4** (_functions with 2 or more arguments_):
 * IN
-* INDEX
 * JOIN
-* all
-* any
 * atan2
-* capture
 * copysign
 * drem
 * fdim
@@ -263,21 +245,16 @@ Configure the keyword lists as follows:
 * jn
 * ldexp
 * limit
-* match
 * nextafter
 * nexttoward
-* nth
 * pow
 * range
-* recurse
 * remainder
 * scalb
 * scalbln
 * setpath
 * split
-* splits
 * sub
-* test
 * until
 * while
 * yn
