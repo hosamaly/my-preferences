@@ -9,7 +9,7 @@ files in JetBrains IDEs:
 
 Configure the keyword lists as follows:
 
-List 1 (keywords):
+**List 1** (_keywords_):
 * and
 * as
 * break
@@ -34,7 +34,7 @@ List 1 (keywords):
 * try
 * while
 
-List 2 (functions with 1 argument):
+**List 2** (_functions with 1 argument_):
 * IN
 * INDEX
 * all
@@ -91,7 +91,7 @@ List 2 (functions with 1 argument):
 * walk
 * with_entries
 
-List 2 (functions with 0 arguments; moved to list 2 because I like this color better!):
+**List 3** (_functions with 0 arguments_; moved to list 2 because I like this color better!):
 * acos
 * acosh
 * add
@@ -216,7 +216,7 @@ List 2 (functions with 0 arguments; moved to list 2 because I like this color be
 * y0
 * y1
 
-List 4 (functions with 2 or more arguments):
+**List 4** (_functions with 2 or more arguments_):
 * JOIN
 * fma
 * gsub
